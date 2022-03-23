@@ -1,8 +1,16 @@
 <html>
 	<head>
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
 		<script>
 			const params = new Proxy(new URLSearchParams(window.location.search), { get: (searchParams, prop) => searchParams.get(prop), });
-			window.location.replace(params.url);
+			var img = $("<img />").attr('src', params.url).on('load', function() {
+		        if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+		            alert('broken image!');
+		        } else {
+		            $("body").append(img);
+		        }
+    		});
 		</script>
 	</head>
+	<body></body>
 </html>
